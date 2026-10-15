@@ -1,6 +1,5 @@
 destinations = [
     {
-        "id": 1,
         "slug": "kioto",
         "name": "Kioto",
         "country": "Japón",
@@ -11,7 +10,6 @@ destinations = [
         "image": None,
     },
     {
-        "id": 2,
         "slug": "islas-lofoten",
         "name": "Islas Lofoten",
         "country": "Noruega",
@@ -22,7 +20,6 @@ destinations = [
         "image": None,
     },
     {
-        "id": 3,
         "slug": "zanzibar",
         "name": "Zanzíbar",
         "country": "Tanzania",
@@ -33,7 +30,6 @@ destinations = [
         "image": None,
     },
     {
-        "id": 4,
         "slug": "playa-del-carmen",
         "name": "Playa del Carmen",
         "country": "México",
