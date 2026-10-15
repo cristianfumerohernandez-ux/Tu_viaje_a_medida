@@ -1,0 +1,53 @@
+/* Main Colors */
+:root {
+    --primary-color: #01080a;
+    --secondary-color: #ffffff;
+    --accent-color: rgb(235, 174, 8);
+}
+
+header{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: center;
+    justify-content: center;
+    padding: 1rem;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 1rem;
+}
+nav ul li a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+nav ul li a:hover {
+    text-decoration: underline;
+    transition: color 0.3s ease;
+    color: var(--accent-color);
+}
+main {
+    padding: 2rem;
+    text-align: center;
+}
+footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+}

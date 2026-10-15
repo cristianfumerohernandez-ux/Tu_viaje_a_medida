@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mi App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header>
@@ -12,13 +13,17 @@
             <h1>{% block header %}Bienvenidos{% endblock %}</h1>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
+                <li><a href="{{ url_for('aboutUs') }}">Acerca de nosotros</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-    
-    
+    <main>
+        {% block content %}
+        <h2>Contenido principal</h2>
+        <p>Este es el contenido principal de la página.</p>
+        {% endblock %}
+    </main>
     
     <footer>
         <hr>
