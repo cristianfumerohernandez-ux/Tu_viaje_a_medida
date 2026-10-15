@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, render_template, request, url_for, abort
 
 # Inicializamos la aplicación
 app = Flask(__name__)
@@ -6,10 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return """
-        <h1>¡Hola desde Flask en Docker!!!!</h1>
-        <p>Este es tu primer servidor Python funcionando.</p>
-    """
+    return render_template("index.html")
 
 if __name__ == "__main__":
     # host='0.0.0.0' es VITAL en Docker para que el servidor sea accesible desde fuera del contenedor
