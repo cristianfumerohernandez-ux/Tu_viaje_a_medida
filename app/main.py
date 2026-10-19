@@ -1,8 +1,13 @@
 from flask import Flask, redirect, render_template, request, url_for, abort
+from src.main_lists import showActivities
 
 # Inicializamos la aplicación
 app = Flask(__name__)
 # app.config["SECRET_KEY"] = "mi_clave_secreta_super_segura"
+
+@app.context_processor
+def injectActivities():
+    return {"activities": showActivities()}
 
 @app.route("/")
 def home():
@@ -12,6 +17,9 @@ def home():
 def aboutUs():
     return render_template ("about-us.html")
 
+@app.errorhandler(404)
+def notFound(e):
+    return render_template("404.html"), 404
 if __name__ == "__main__":
     # host='0.0.0.0' es VITAL en Docker para que el servidor sea accesible desde fuera del contenedor
     # debug=True hará que el servidor se reinicie automáticamente si cambias este archivo

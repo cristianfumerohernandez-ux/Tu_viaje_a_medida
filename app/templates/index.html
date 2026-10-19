@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block style %}{% endblock %}
 </head>
+
 <body>
     <header>
 
@@ -21,14 +23,27 @@
     </header>
     <main>
         {% block content %}
-        <h2>Contenido principal</h2>
-        <p>Este es el contenido principal de la página.</p>
+        <section id="activities">
+            <h1>Listado General de Actividades</h1>
+            {% if activities %}
+            <ul>
+                {% for activity in activities %}
+                <li>
+                    <strong>{{ activity.name }}</strong> — {{ activity.destination }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No hay actividades disponibles.</p>
+            {% endif %}
+        </section>
         {% endblock %}
     </main>
-    
+
     <footer>
         <hr>
         <p>2026&copy;IES Las Galletas</p>
     </footer>
 </body>
+
 </html>

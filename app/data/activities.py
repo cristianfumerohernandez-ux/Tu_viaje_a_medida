@@ -49,7 +49,6 @@ activities = [
         "notes": None,
     },
     # Islas Lofoten: sin actividades por ahora.
-
     # --- Zanzíbar ---
     {
         "slug": "ruta-de-las-especias-y-paseo-en-dhow",
