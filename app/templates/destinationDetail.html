@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>{{ item.name }}</h1>
+<p>{{ item.country }}</p>
+
+<ul class="detail-list">
+  <li><strong>Entorno:</strong> {{ item.environment }}</li>
+  <li><strong>Temporada alta:</strong> {{ item.high_season }}</li>
+  <li><strong>Visado:</strong> {{ "Sí" if item.is_visa_required else "No" }}</li>
+</ul>
+
+{% if item.tip %}
+  <p><strong>Consejo:</strong> {{ item.tip }}</p>
+{% endif %}
+
+{% if item.image %}
+  <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.name }}">
+{% endif %}
+
+<a href="{{ url_for('index') }}">← Volver al catálogo</a>
+{% endblock %}

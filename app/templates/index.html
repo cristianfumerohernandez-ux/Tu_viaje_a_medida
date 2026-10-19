@@ -23,7 +23,7 @@
     </header>
     <main>
         {% block content %}
-        <section id="activities">
+ <section id="activities">
             <h1>Listado General de Actividades</h1>
             {% if activities %}
             <ul>
@@ -36,6 +36,15 @@
             {% else %}
             <p>No hay actividades disponibles.</p>
             {% endif %}
+        </section>
+
+        <section id="destinations_container">
+            <h2>Destinos</h2>
+            <ul>
+                {% for d in destinations %}
+                <li><a href="{{ url_for('destinationDetail', slug=d.slug) }}">{{ d.name }}</a> — {{ d.country }}</li>
+                {% endfor %}
+            </ul>
         </section>
         {% endblock %}
     </main>
