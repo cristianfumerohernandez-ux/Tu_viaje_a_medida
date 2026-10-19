@@ -2,6 +2,10 @@
 
 {% block title%}Acerca de nosotros{% endblock %}
 
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/aboutUs.css')}}">
+{% endblock %}
+
 {% block content %}
 <h3>Acerca de nosotros</h3>
 <h2>Descubre el mundo con Tu Viaje a Medida</h2>
@@ -56,7 +60,8 @@
 <p>Organiza experiencias relacionadas con la naturaleza, las rutas de senderismo y los destinos menos convencionales,
     siempre teniendo en cuenta las preferencias y necesidades de cada viajero.</p>
 <h2>¿Qué ofrecemos?</h2>
-<p>En <strong>Tu Viaje a Medida</strong> trabajamos para que cada viaje sea una experiencia especial. Entre nuestros principales servicios se encuentran:</p>
+<p>En <strong>Tu Viaje a Medida</strong> trabajamos para que cada viaje sea una experiencia especial. Entre nuestros
+    principales servicios se encuentran:</p>
 <ul>
     <li>Viajes nacionales e internacionales.</li>
     <li>Paquetes vacacionales para familias y parejas.</li>
@@ -67,9 +72,17 @@
     <li>Itinerarios personalizados para viajes a medida.</li>
 </ul>
 <h2>Contacta con nostros</h2>
-<p>¿Estás pensando en tu próximo viaje? Nuestro equipo estará encantado de ayudarte a encontrar el destino ideal y resolver cualquier duda.</p>
+<p>¿Estás pensando en tu próximo viaje? Nuestro equipo estará encantado de ayudarte a encontrar el destino ideal y
+    resolver cualquier duda.</p>
 <p><strong>Dirección: </strong>Avenida Tres de Mayo, 18, 38003, Santa Cruz de Tenerife, España.</p>
 <p><strong>Teléfono de atención al cliente: </strong>+34 922 555 184.</p>
 <p><strong>Correo electrónico: </strong>hola@tuviajeamedida.example</p>
 <p><strong>Horario comercial: </strong></p>
+<ul>
+    <li>De lunes a viernes: 09:00 - 18:00</li>
+    <li>Sábados: 09:00 - 13:00</li>
+    <li>Domingos y festivos: cerrado.</li>
+</ul>
+<p>En <strong>Tu viaje a medida</strong>, tu próxima aventura comienza con una buena planificación. Cuéntanos dónde
+    quieres ir y nosotros te ayudaremos a hacerlo realidad.</p>
 {% endblock %}
