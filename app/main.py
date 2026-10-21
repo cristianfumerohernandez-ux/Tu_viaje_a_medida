@@ -57,29 +57,37 @@ def accommodationsDetails(slug):
 
 
 @app.route("/search")
-def search():
+def searchIndex():
+    return redirect(url_for("search", mode="destinos"))
+
+
+@app.route("/search/<mode>")
+def search(mode):
+    if mode not in ("destinos", "alojamientos", "medida"):
+        abort(404)
+
     args = request.args
-    mode = args.get("modo", "destinos")
+    environment = args.get("environment", "")
     if mode not in ("destinos", "alojamientos", "medida"):
         mode = "destinos"
- 
+
     environment = args.get("environment", "")
     acc_type = args.get("type", "")
     max_price = args.get("max_price", type=float)  # None si está vacío o no es número
     no_visa = args.get("no_visa") == "on"
     breakfast = args.get("breakfast") == "on"
     pets = args.get("pets") == "on"
- 
+
     found_destinations, found_accommodations, combos = [], [], []
- 
+
     if mode == "destinos":
         found_destinations = filterDestinations(environment, no_visa)
- 
+
     elif mode == "alojamientos":
         found_accommodations = filterAccommodations(
             max_price, acc_type, breakfast, pets
         )
- 
+
     else:  # "medida": solo destinos con al menos un alojamiento que cumpla todo
         accommodations_ok = filterAccommodations(max_price, acc_type, breakfast)
         for d in filterDestinations(environment, no_visa):
@@ -88,7 +96,7 @@ def search():
             ]
             if matches:
                 combos.append({"destination": d, "accommodations": matches})
- 
+
     return render_template(
         "search.html",
         mode=mode,

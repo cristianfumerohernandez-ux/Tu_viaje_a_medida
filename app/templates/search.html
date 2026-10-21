@@ -8,110 +8,125 @@
 
 {% block content %}
 <nav class="search-tabs" aria-label="Herramientas de búsqueda">
-  <a href="{{ url_for('search', modo='destinos') }}" class="{{ 'active' if mode == 'destinos' }}">Explorador de destinos</a>
-  <a href="{{ url_for('search', modo='alojamientos') }}" class="{{ 'active' if mode == 'alojamientos' }}">Comparador de alojamientos</a>
-  <a href="{{ url_for('search', modo='medida') }}" class="{{ 'active' if mode == 'medida' }}">Viaje a medida</a>
+    <a href="{{ url_for('search', mode='destinos') }}" class="{{ 'active' if mode == 'destinos' }}">Explorador de
+        destinos</a>
+    <a href="{{ url_for('search', mode='alojamientos') }}" class="{{ 'active' if mode == 'alojamientos' }}">Comparador
+        de alojamientos</a>
+    <a href="{{ url_for('search', mode='medida') }}" class="{{ 'active' if mode == 'medida' }}">Viaje a medida</a>
 </nav>
 
-<form class="search-form" method="get" action="{{ url_for('search') }}">
-  <input type="hidden" name="modo" value="{{ mode }}">
+<form class="search-form" method="get" action="{{ url_for('search', mode=mode) }}">
+    <input type="hidden" name="modo" value="{{ mode }}">
 
-  {% if mode in ('destinos', 'medida') %}
-  <div>
-    <label for="environment">Entorno</label>
-    <select id="environment" name="environment">
-      <option value="">Cualquiera</option>
-      {% for e in ['playa', 'montaña', 'ciudad'] %}
-      <option value="{{ e }}" {{ 'selected' if f.get('environment') == e }}>{{ e|capitalize }}</option>
-      {% endfor %}
-    </select>
-    <label class="chk"><input type="checkbox" name="no_visa" {{ 'checked' if f.get('no_visa') }}> Solo destinos sin visado previo</label>
-  </div>
-  {% endif %}
-
-  {% if mode in ('alojamientos', 'medida') %}
-  <div>
-    <label for="type">Tipo de alojamiento</label>
-    <select id="type" name="type">
-      <option value="">Cualquiera</option>
-      {% for t in ['hotel', 'hostal', 'cabaña', 'apartamento'] %}
-      <option value="{{ t }}" {{ 'selected' if f.get('type') == t }}>{{ t|capitalize }}</option>
-      {% endfor %}
-    </select>
-    <label for="max_price" style="margin-top:.6rem">Máximo por noche (€)</label>
-    <input type="number" id="max_price" name="max_price" min="0" step="5" value="{{ f.get('max_price', '') }}">
-  </div>
-  <div>
-    <label class="chk"><input type="checkbox" name="breakfast" {{ 'checked' if f.get('breakfast') }}> Desayuno incluido</label>
-    {% if mode == 'alojamientos' %}
-    <label class="chk"><input type="checkbox" name="pets" {{ 'checked' if f.get('pets') }}> Admite mascotas</label>
+    {% if mode in ('destinos', 'medida') %}
+    <div>
+        <label for="environment">Entorno</label>
+        <select id="environment" name="environment">
+            <option value="">Cualquiera</option>
+            {% for e in ['playa', 'montaña', 'ciudad'] %}
+            <option value="{{ e }}" {{ 'selected' if f.get('environment')==e }}>{{ e|capitalize }}</option>
+            {% endfor %}
+        </select>
+        <label class="chk"><input type="checkbox" name="no_visa" {{ 'checked' if f.get('no_visa') }}> Solo destinos sin
+            visado previo</label>
+    </div>
     {% endif %}
-  </div>
-  {% endif %}
 
-  <button type="submit">Buscar</button>
+    {% if mode in ('alojamientos', 'medida') %}
+    <div>
+        <label for="type">Tipo de alojamiento</label>
+        <select id="type" name="type">
+            <option value="">Cualquiera</option>
+            {% for t in ['hotel', 'hostal', 'cabaña', 'apartamento'] %}
+            <option value="{{ t }}" {{ 'selected' if f.get('type')==t }}>{{ t|capitalize }}</option>
+            {% endfor %}
+        </select>
+        <label for="max_price" style="margin-top:.6rem">Máximo por noche (€)</label>
+        <input type="number" id="max_price" name="max_price" min="0" step="5" value="{{ f.get('max_price', '') }}">
+    </div>
+    <div>
+        <label class="chk"><input type="checkbox" name="breakfast" {{ 'checked' if f.get('breakfast') }}> Desayuno
+            incluido</label>
+        {% if mode == 'alojamientos' %}
+        <label class="chk"><input type="checkbox" name="pets" {{ 'checked' if f.get('pets') }}> Admite mascotas</label>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <button type="submit">Buscar</button>
 </form>
 
 {# ---------- Resultados ---------- #}
 {% if mode == 'destinos' %}
-  <p><strong>{{ found_destinations|length }}</strong> destino{{ '' if found_destinations|length == 1 else 's' }} encontrado{{ '' if found_destinations|length == 1 else 's' }}</p>
-  {% if found_destinations %}
-  <div class="results">
+<p><strong>{{ found_destinations|length }}</strong> destino{{ '' if found_destinations|length == 1 else 's' }}
+    encontrado{{ '' if found_destinations|length == 1 else 's' }}</p>
+{% if found_destinations %}
+<div class="results">
     {% for d in found_destinations %}
     <article class="result-card">
-      <h3><a href="{{ url_for('destinationDetail', slug=d.slug) }}">{{ d.name }}</a></h3>
-      <p class="meta">{{ d.country }} · Temporada alta: {{ d.high_season }}</p>
-      <span class="tag">{{ d.environment|capitalize }}</span>
-      <span class="tag {{ 'danger' if d.is_visa_required else 'ok' }}">{{ 'Requiere visado' if d.is_visa_required else 'Sin visado previo' }}</span>
+        <h3><a href="{{ url_for('destinationDetail', slug=d.slug) }}">{{ d.name }}</a></h3>
+        <p class="meta">{{ d.country }} · Temporada alta: {{ d.high_season }}</p>
+        <span class="tag">{{ d.environment|capitalize }}</span>
+        <span class="tag {{ 'danger' if d.is_visa_required else 'ok' }}">{{ 'Requiere visado' if d.is_visa_required else
+            'Sin visado previo' }}</span>
     </article>
     {% endfor %}
-  </div>
-  {% else %}
-  <div class="empty">Ningún destino cumple esos criterios. Prueba a quitar el filtro de visado o a cambiar el entorno.</div>
-  {% endif %}
+</div>
+{% else %}
+<div class="empty">Ningún destino cumple esos criterios. Prueba a quitar el filtro de visado o a cambiar el entorno.
+</div>
+{% endif %}
 
 {% elif mode == 'alojamientos' %}
-  <p><strong>{{ found_accommodations|length }}</strong> alojamiento{{ '' if found_accommodations|length == 1 else 's' }} encontrado{{ '' if found_accommodations|length == 1 else 's' }}</p>
-  {% if found_accommodations %}
-  <div class="results">
+<p><strong>{{ found_accommodations|length }}</strong> alojamiento{{ '' if found_accommodations|length == 1 else 's' }}
+    encontrado{{ '' if found_accommodations|length == 1 else 's' }}</p>
+{% if found_accommodations %}
+<div class="results">
     {% for a in found_accommodations %}
     {% set d = destinations_by_slug[a.destination_slug] %}
     <article class="result-card">
-      <h3><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}">{{ a.name }}</a>{% if a.stars %}<span class="stars" role="img" aria-label="{{ a.stars }} estrellas">{{ '★' * a.stars }}</span>{% endif %}</h3>
-      <p class="meta">{{ d.name }}, {{ d.country }}</p>
-      <p class="price">{{ a.price_per_night }} € <span class="meta">/ noche</span></p>
-      <span class="tag">{{ a.type }}</span>
-      {% if a.includes_breakfast %}<span class="tag ok">Desayuno</span>{% endif %}
-      {% if a.allows_pets %}<span class="tag ok">Mascotas</span>{% endif %}
-      {% if d.is_visa_required %}<span class="tag danger">Destino con visado</span>{% endif %}
+        <h3><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}">{{ a.name }}</a>{% if a.stars %}<span
+                class="stars" role="img" aria-label="{{ a.stars }} estrellas">{{ '★' * a.stars }}</span>{% endif %}</h3>
+        <p class="meta">{{ d.name }}, {{ d.country }}</p>
+        <p class="price">{{ a.price_per_night }} € <span class="meta">/ noche</span></p>
+        <span class="tag">{{ a.type }}</span>
+        {% if a.includes_breakfast %}<span class="tag ok">Desayuno</span>{% endif %}
+        {% if a.allows_pets %}<span class="tag ok">Mascotas</span>{% endif %}
+        {% if d.is_visa_required %}<span class="tag danger">Destino con visado</span>{% endif %}
     </article>
     {% endfor %}
-  </div>
-  {% else %}
-  <div class="empty">No hay alojamientos con esas condiciones. Sube el presupuesto o relaja alguna exigencia.</div>
-  {% endif %}
+</div>
+{% else %}
+<div class="empty">No hay alojamientos con esas condiciones. Sube el presupuesto o relaja alguna exigencia.</div>
+{% endif %}
 
 {% else %}
-  <p><strong>{{ combos|length }}</strong> destino{{ '' if combos|length == 1 else 's' }} con alojamientos que cumplen todos tus requisitos</p>
-  {% for c in combos %}
-  <article class="combo">
+<p><strong>{{ combos|length }}</strong> destino{{ '' if combos|length == 1 else 's' }} con alojamientos que cumplen
+    todos tus requisitos</p>
+{% for c in combos %}
+<article class="combo">
     <header>
-      <h3><a href="{{ url_for('destinationDetail', slug=c.destination.slug) }}">{{ c.destination.name }}</a></h3>
-      <p>{{ c.destination.country }} · {{ c.destination.environment|capitalize }}
-        <span class="tag {{ 'danger' if c.destination.is_visa_required else 'ok' }}">{{ 'Requiere visado' if c.destination.is_visa_required else 'Sin visado previo' }}</span></p>
+        <h3><a href="{{ url_for('destinationDetail', slug=c.destination.slug) }}">{{ c.destination.name }}</a></h3>
+        <p>{{ c.destination.country }} · {{ c.destination.environment|capitalize }}
+            <span class="tag {{ 'danger' if c.destination.is_visa_required else 'ok' }}">{{ 'Requiere visado' if
+                c.destination.is_visa_required else 'Sin visado previo' }}</span>
+        </p>
     </header>
     <ul>
-      {% for a in c.accommodations %}
-      <li>
-        <span><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}"><strong>{{ a.name }}</strong></a>{% if a.stars %}<span class="stars" role="img" aria-label="{{ a.stars }} estrellas">{{ '★' * a.stars }}</span>{% endif %}
-          <span class="meta">{{ a.type }}{{ ' · desayuno incluido' if a.includes_breakfast }}</span></span>
-        <span class="price">{{ a.price_per_night }} €</span>
-      </li>
-      {% endfor %}
+        {% for a in c.accommodations %}
+        <li>
+            <span><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}"><strong>{{ a.name }}</strong></a>{% if
+                a.stars %}<span class="stars" role="img" aria-label="{{ a.stars }} estrellas">{{ '★' * a.stars
+                    }}</span>{% endif %}
+                <span class="meta">{{ a.type }}{{ ' · desayuno incluido' if a.includes_breakfast }}</span></span>
+            <span class="price">{{ a.price_per_night }} €</span>
+        </li>
+        {% endfor %}
     </ul>
-  </article>
-  {% else %}
-  <div class="empty">No hay ninguna combinación de destino y alojamiento que cumpla todos tus requisitos a la vez. Prueba a subir el gasto máximo, cambiar el tipo de alojamiento o quitar el desayuno.</div>
-  {% endfor %}
+</article>
+{% else %}
+<div class="empty">No hay ninguna combinación de destino y alojamiento que cumpla todos tus requisitos a la vez. Prueba
+    a subir el gasto máximo, cambiar el tipo de alojamiento o quitar el desayuno.</div>
+{% endfor %}
 {% endif %}
 {% endblock %}
