@@ -41,3 +41,21 @@ def getAccommodations(slug):
 # Para las fichas individuales (los enlaces apuntan aquí)
 def getDestination(slug):
     return next((d for d in destinations if d["slug"] == slug), None)
+
+def filterDestinations(environment="", no_visa=False):
+    return [
+        d for d in destinations
+        if (not environment or d["environment"] == environment)
+        and (not no_visa or not d["is_visa_required"])
+    ]
+ 
+ 
+def filterAccommodations(max_price=None, acc_type="", breakfast=False, pets=False):
+    result = [
+        a for a in accommodations
+        if (max_price is None or a["price_per_night"] <= max_price)
+        and (not acc_type or a["type"].lower() == acc_type)
+        and (not breakfast or a["includes_breakfast"])
+        and (not pets or a["allows_pets"])
+    ]
+    return sorted(result, key=lambda a: a["price_per_night"])
