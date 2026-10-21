@@ -10,6 +10,8 @@ accommodations = [
         "allows_pets": False,
         "stars": 4,
         "extras": "Baño termal privado en la habitación",
+
+        "destination_name": "Kioto",
     },
     {
         "slug": "capsule-hostel-urban",
@@ -21,6 +23,8 @@ accommodations = [
         "allows_pets": False,
         "stars": 2,
         "extras": None,
+
+        "destination_name": "Kioto",
     },
     {
         "slug": "apartamento-bambu-arashiyama",
@@ -32,6 +36,8 @@ accommodations = [
         "allows_pets": True,
         "stars": None,
         "extras": "Terraza con vistas al río",
+
+        "destination_name": "Kioto",
     },
     # --- Islas Lofoten ---
     {
@@ -44,6 +50,8 @@ accommodations = [
         "allows_pets": True,
         "stars": 4,
         "extras": "Acceso directo al muelle del fiordo",
+
+        "destination_name": "Islas Lofoten",
     },
     {
         "slug": "arctic-light-hotel",
@@ -55,6 +63,8 @@ accommodations = [
         "allows_pets": False,
         "stars": 5,
         "extras": "Mirador acristalado en la azotea",
+
+        "destination_name": "Islas Lofoten",
     },
     {
         "slug": "refugio-de-pescadores-svolvaer",
@@ -66,6 +76,8 @@ accommodations = [
         "allows_pets": True,
         "stars": None,
         "extras": None,
+
+        "destination_name": "Islas Lofoten",
     },
     # Zanzíbar: sin alojamientos por ahora.
 
@@ -80,6 +92,8 @@ accommodations = [
         "allows_pets": True,
         "stars": 2,
         "extras": None,
+
+        "destination_name": "Playa del Carmen",
     },
     {
         "slug": "eco-villas-tulum-road",
@@ -91,6 +105,8 @@ accommodations = [
         "allows_pets": True,
         "stars": 3,
         "extras": "Funciona al 100% con energía solar",
+
+        "destination_name": "Playa del Carmen",
     },
     {
         "slug": "grand-resort-riviera",
@@ -102,6 +118,8 @@ accommodations = [
         "allows_pets": False,
         "stars": 5,
         "extras": "Club de playa privado",
+
+        "destination_name": "Playa del Carmen",
     },
     {
         "slug": "loft-quinta-avenida",
@@ -113,5 +131,7 @@ accommodations = [
         "allows_pets": False,
         "stars": None,
         "extras": None,
+
+        "destination_name": "Playa del Carmen",
     },
 ]

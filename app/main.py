@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, url_for, abort
-from src.main_lists import (getDestinationList,getDestination,showActivities, getAccomodationsList, getAccommodations)
+from src.main_lists import (getDestinationList,getDestination,showActivities, getAccomodationsList, getAccommodations, getActivities)
 
 # Inicializamos la aplicación
 app = Flask(__name__)
@@ -35,11 +35,34 @@ def destinationDetail(slug):
 
 @app.route("/alojamientos/<slug>")
 def accommodationsDetails(slug):
+    
     item = getAccommodations(slug)
     if item is None:
         abort(404)
+
+    destination = getDestination(item["destination_slug"])
+    if destination is None:
+        abort(404)
         
-    return render_template("accommodationsDetails.html", item=item)
+    return (render_template("accommodationsDetails.html", 
+                            item=item,
+                            destination=destination,
+                            destinations = getDestinationList()))
+    
+@app.route("/actividad/<slug>")
+def activitiesDetails(slug):
+    item = getActivities(slug)
+    if item is None:
+        abort(404)
+        
+    destination = getDestination(item["destination_slug"])
+    if destination is None:
+        abort(404)
+        
+    return (render_template("activitiesDetails.html", 
+                                item=item,
+                                destination=destination,
+                                destinations = getDestinationList()))
 
 @app.route("/search")
 def search():

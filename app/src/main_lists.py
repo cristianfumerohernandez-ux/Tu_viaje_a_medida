@@ -7,6 +7,7 @@ def showActivities():
     destinationNames = {d["slug"]: d["name"] for d in destinations}
     return [
         {
+            "slug": activity["slug"],
             "name": activity["name"],
             "destination": destinationNames.get(
                 activity["destination_slug"], "Destino desconocido"
@@ -37,6 +38,9 @@ def getAccomodationsList():
     
 def getAccommodations(slug):
     return next((a for a in accommodations if a["slug"] == slug), None)
+
+def getActivities(slug):
+    return next((a for a in activities if a["slug"] == slug), None)
 
 # Para las fichas individuales (los enlaces apuntan aquí)
 def getDestination(slug):
