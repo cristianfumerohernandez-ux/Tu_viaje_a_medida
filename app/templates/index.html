@@ -17,7 +17,7 @@
             <ul>
                 <li><a href="/">Inicio</a></li>
                 <li><a href="{{ url_for('aboutUs') }}">Acerca de nosotros</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="{{ url_for('search') }}">Busqueda</a></li>
             </ul>
         </nav>
     </header>
@@ -28,6 +28,16 @@
             <ul>
                 {% for d in destinations %}
                 <li><a href="{{ url_for('destinationDetail', slug=d.slug) }}">{{ d.name }}</a> — {{ d.country }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        
+        <section id="accommodations_container">
+            <h2>Alojamientos</h2>
+            <ul>
+                {% for a in accommodations %}
+                <li><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}">{{ a.name }}</a> — {{ a.type }}</li>
                 {% endfor %}
             </ul>
         </section>
@@ -45,15 +55,6 @@
             {% else %}
             <p>No hay actividades disponibles.</p>
             {% endif %}
-        </section>
-        
-        <section id="accommodations_container">
-            <h2>Alojamientos</h2>
-            <ul>
-                {% for a in accommodations %}
-                <li><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}">{{ a.name }}</a> — {{ a.type }}</li>
-                {% endfor %}
-            </ul>
         </section>
         {% endblock %}
     </main>

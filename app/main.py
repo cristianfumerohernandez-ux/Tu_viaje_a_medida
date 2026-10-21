@@ -41,6 +41,9 @@ def accommodationsDetails(slug):
         
     return render_template("accommodationsDetails.html", item=item)
 
+@app.route("/search")
+def search():
+    return render_template ("search.html")
 
 if __name__ == "__main__":
     # host='0.0.0.0' es VITAL en Docker para que el servidor sea accesible desde fuera del contenedor
