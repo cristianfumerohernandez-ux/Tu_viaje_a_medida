@@ -27,17 +27,28 @@
             <h2>Destinos</h2>
             <ul>
                 {% for d in destinations %}
-                <li><a href="{{ url_for('destinationDetail', slug=d.slug) }}">{{ d.name }}</a> — {{ d.country }}</li>
+                <li><a href="{{ url_for('destinationDetail', slug=d.slug) }}">
+                        {% if d.image %}
+                        <img src="{{ url_for('static', filename='img/destinations/' ~ d.image) }}" alt="{{ d.name }}">
+                        {% endif %}
+                        {{ d.name }}</a> — {{ d.country }}
+                    </li>
                 {% endfor %}
             </ul>
         </section>
 
-        
         <section id="accommodations_container">
             <h2>Alojamientos</h2>
             <ul>
                 {% for a in accommodations %}
-                <li><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}">{{ a.name }}</a> — {{ a.type }}</li>
+                <li>
+                    <a href="{{ url_for('accommodationsDetails', slug=a.slug) }}">
+                        {% if a.image %}
+                        <img src="{{ url_for('static', filename='img/accomodations/' ~ a.image) }}" alt="{{ a.name }}">
+                        {% endif %}
+                        {{ a.name }}
+                    </a> — {{ a.type }}
+                </li>
                 {% endfor %}
             </ul>
         </section>

@@ -7,7 +7,7 @@ destinations = [
         "high_season": "primavera",
         "is_visa_required": False,
         "tip": "La moneda local es el yen y recomendamos llevar siempre efectivo para el acceso a los templos tradicionales.",
-        "image": None,
+        "image": "kioto.jpg",
     },
     {
         "slug": "islas-lofoten",
@@ -17,7 +17,7 @@ destinations = [
         "high_season": "invierno",
         "is_visa_required": False,
         "tip": "Es imprescindible viajar con ropa térmica extrema y calzado impermeable.",
-        "image": None,
+        "image": "islas-lofoten.jpg",
     },
     {
         "slug": "zanzibar",
@@ -27,7 +27,7 @@ destinations = [
         "high_season": "verano",
         "is_visa_required": True,
         "tip": None,
-        "image": None,
+        "image": "zanzibar.jpg",
     },
     {
         "slug": "playa-del-carmen",
@@ -37,6 +37,6 @@ destinations = [
         "high_season": "verano",
         "is_visa_required": False,
         "tip": "La moneda es el peso mexicano, aunque aceptan dólares en casi todas las zonas turísticas.",
-        "image": None,
+        "image": "mexico.jpg",
     },
 ]

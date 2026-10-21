@@ -22,6 +22,7 @@ def getDestinationList():
             "slug": d["slug"],
             "name": d["name"],
             "country": d["country"],
+            "image": d["image"]
         })
     return result
 
@@ -32,6 +33,7 @@ def getAccomodationsList():
             "slug": a["slug"],
             "name": a["name"],
             "type": a["type"],
+            "image": a["image"]
         })
     return result
     

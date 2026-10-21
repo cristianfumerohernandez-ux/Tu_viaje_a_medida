@@ -11,11 +11,11 @@
 </ul>
 
 {% if item.tip %}
-  <p><strong>Consejo:</strong> {{ item.tip }}</p>
+<p><strong>Consejo:</strong> {{ item.tip }}</p>
 {% endif %}
 
 {% if item.image %}
-  <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.name }}">
+<img src="{{ url_for('static', filename='img/destinations/' ~ item.image) }}" alt="{{ item.name }}">
 {% endif %}
 
 <a href="{{ url_for('index') }}">← Volver al catálogo</a>
