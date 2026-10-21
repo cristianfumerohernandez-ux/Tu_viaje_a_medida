@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, url_for, abort
-from src.main_lists import (getDestinationList,getDestination,showActivities)
+from src.main_lists import (getDestinationList,getDestination,showActivities, getAccomodationsList, getAccommodations)
 
 # Inicializamos la aplicación
 app = Flask(__name__)
@@ -13,7 +13,8 @@ def injectActivities():
 def index():
     return render_template(
         "index.html",
-        destinations=getDestinationList()
+        destinations = getDestinationList(),
+        accommodations = getAccomodationsList() 
     )
 
 @app.route("/about-us")
@@ -31,6 +32,15 @@ def destinationDetail(slug):
         abort(404)
         
     return render_template("destinationDetail.html", item=item)
+
+@app.route("/alojamientos/<slug>")
+def accommodationsDetails(slug):
+    item = getAccommodations(slug)
+    if item is None:
+        abort(404)
+        
+    return render_template("accommodationsDetails.html", item=item)
+
 
 if __name__ == "__main__":
     # host='0.0.0.0' es VITAL en Docker para que el servidor sea accesible desde fuera del contenedor

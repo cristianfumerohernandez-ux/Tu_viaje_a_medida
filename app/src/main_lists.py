@@ -25,6 +25,19 @@ def getDestinationList():
         })
     return result
 
+def getAccomodationsList():
+    result = []
+    for a in accommodations:
+        result.append({
+            "slug": a["slug"],
+            "name": a["name"],
+            "type": a["type"],
+        })
+    return result
+    
+def getAccommodations(slug):
+    return next((a for a in accommodations if a["slug"] == slug), None)
+
 # Para las fichas individuales (los enlaces apuntan aquí)
 def getDestination(slug):
     return next((d for d in destinations if d["slug"] == slug), None)

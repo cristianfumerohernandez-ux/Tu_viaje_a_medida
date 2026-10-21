@@ -46,7 +46,15 @@
             <p>No hay actividades disponibles.</p>
             {% endif %}
         </section>
-
+        
+        <section id="accommodations_container">
+            <h2>Alojamientos</h2>
+            <ul>
+                {% for a in accommodations %}
+                <li><a href="{{ url_for('accommodationsDetails', slug=a.slug) }}">{{ a.name }}</a> — {{ a.type }}</li>
+                {% endfor %}
+            </ul>
+        </section>
         {% endblock %}
     </main>
 
