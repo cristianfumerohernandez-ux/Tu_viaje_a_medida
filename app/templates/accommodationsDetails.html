@@ -1,22 +1,31 @@
+
 {% extends "index.html" %}
 
 {% block content %}
 <h1>{{ item.name }}</h1>
-<p>{{ item.type }}</p>
 
 <ul class="detail-list">
-  <li><strong>Entorno:</strong> {{ item.environment }}</li>
-  <li><strong>Temporada alta:</strong> {{ item.high_season }}</li>
-  <li><strong>Visado:</strong> {{ "Sí" if item.is_visa_required else "No" }}</li>
+  <li><strong>Nombre establecimiento:</strong> {{ item.name }}</li>
+  <li><strong>Nivel de estrellas:</strong> {{ item.stars }}</li>
+  <li><strong>Precio por noche:</strong> {{ item.price_per_night }}€ </li>
+  <li><strong>¿Tiene incluido desayuno?</strong> {{ "Sí" if item.includes_breakfast else "No" }}</li>
+  <li><strong>¿Acepta mascotas?</strong> {{ "Sí" if item.allows_pets else "No" }}</li>
 </ul>
 
 {% if item.tip %}
 <p><strong>Consejo:</strong> {{ item.tip }}</p>
 {% endif %}
 
+{% if item.extras %}
+<p><strong>Extras:</strong> {{ item.extras }}</p>
+{% endif %}
+
+<p><a href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a></p>
+
+<p><a href="{{ url_for('index') }}">← Volver al catálogo</a></p>
+
 {% if item.image %}
 <img src="{{ url_for('static', filename='img/accomodations/' ~ item.image) }}" alt="{{ item.name }}">
 {% endif %}
 
-<a href="{{ url_for('index') }}">← Volver al catálogo</a>
 {% endblock %}

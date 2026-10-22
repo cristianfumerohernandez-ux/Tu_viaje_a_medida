@@ -5,6 +5,7 @@ from src.main_lists import (
     showActivities,
     getAccomodationsList,
     getAccommodations,
+    getActivities,
     filterDestinations,
     filterAccommodations,
 )
@@ -53,7 +54,32 @@ def accommodationsDetails(slug):
     if item is None:
         abort(404)
 
-    return render_template("accommodationsDetails.html", item=item)
+    destination = getDestination(item["destination_slug"])
+    if destination is None:
+        abort(404)
+
+    return render_template(
+        "accommodationsDetails.html",
+        item=item,
+        destination=destination,
+    )
+
+
+@app.route("/actividad/<slug>")
+def activitiesDetails(slug):
+    item = getActivities(slug)
+    if item is None:
+        abort(404)
+
+    destination = getDestination(item["destination_slug"])
+    if destination is None:
+        abort(404)
+
+    return render_template(
+        "activitiesDetails.html",
+        item=item,
+        destination=destination,
+    )
 
 
 @app.route("/search")

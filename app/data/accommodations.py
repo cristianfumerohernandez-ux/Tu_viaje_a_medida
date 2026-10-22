@@ -11,6 +11,7 @@ accommodations = [
         "stars": 4,
         "extras": "Baño termal privado en la habitación",
         "image": "ryokan-tradicional-gion.jpg",
+        "destination_name": "Kioto",
     },
     {
         "slug": "capsule-hostel-urban",
@@ -23,6 +24,7 @@ accommodations = [
         "stars": 2,
         "extras": None,
         "image": "capsule-hostel-urban.jpg",
+        "destination_name": "Kioto",
     },
     {
         "slug": "apartamento-bambu-arashiyama",
@@ -35,6 +37,7 @@ accommodations = [
         "stars": None,
         "extras": "Terraza con vistas al río",
         "image": "apartamento-bambu-arashiyama.jpg",
+        "destination_name": "Kioto",
     },
     # --- Islas Lofoten ---
     {
@@ -48,6 +51,7 @@ accommodations = [
         "stars": 4,
         "extras": "Acceso directo al muelle del fiordo",
         "image": "rorbu-fjord-cabins.jpg",
+        "destination_name": "Islas Lofoten",
     },
     {
         "slug": "arctic-light-hotel",
@@ -60,6 +64,7 @@ accommodations = [
         "stars": 5,
         "extras": "Mirador acristalado en la azotea",
         "image": "arctic-light-hotel.jpg",
+        "destination_name": "Islas Lofoten",
     },
     {
         "slug": "refugio-de-pescadores-svolvaer",
@@ -72,6 +77,7 @@ accommodations = [
         "stars": None,
         "extras": None,
         "image": "refugio-de-pescadores-svolvaer.jpg",
+        "destination_name": "Islas Lofoten",
     },
     # Zanzíbar: sin alojamientos por ahora.
 
@@ -87,6 +93,7 @@ accommodations = [
         "stars": 2,
         "extras": None,
         "image": "hostal-caribe-maya.jpg",
+        "destination_name": "Playa del Carmen",
     },
     {
         "slug": "eco-villas-tulum-road",
@@ -99,6 +106,7 @@ accommodations = [
         "stars": 3,
         "extras": "Funciona al 100% con energía solar",
         "image": "eco-villas-tulum-road.jpg",
+        "destination_name": "Playa del Carmen",
     },
     {
         "slug": "grand-resort-riviera",
@@ -111,6 +119,7 @@ accommodations = [
         "stars": 5,
         "extras": "Club de playa privado",
         "image": "grand-resort-riviera.jpg",
+        "destination_name": "Playa del Carmen",
     },
     {
         "slug": "loft-quinta-avenida",
@@ -123,5 +132,6 @@ accommodations = [
         "stars": None,
         "extras": None,
         "image": "loft-quinta-avenida.jpg",
+        "destination_name": "Playa del Carmen",
     },
 ]

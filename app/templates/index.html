@@ -59,7 +59,7 @@
             <ul>
                 {% for activity in activities %}
                 <li>
-                    <strong>{{ activity.name }}</strong> — {{ activity.destination }}
+                    <strong><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">{{ activity.name }}</a></strong> — {{ activity.destination }}
                 </li>
                 {% endfor %}
             </ul>
