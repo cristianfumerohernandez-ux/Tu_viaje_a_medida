@@ -1,4 +1,5 @@
 from flask import Flask, redirect, render_template, request, url_for, abort
+from src.forms import get_search_form
 from src.main_lists import (
     getDestinationList,
     getDestination,
@@ -12,7 +13,8 @@ from src.main_lists import (
 
 # Inicializamos la aplicación
 app = Flask(__name__)
-# app.config["SECRET_KEY"] = "mi_clave_secreta_super_segura"
+app.config["SECRET_KEY"] = "mi_clave_secreta_super_segura"
+app.config["WTF_CSRF_ENABLED"] = False
 
 
 @app.context_processor
@@ -87,22 +89,39 @@ def searchIndex():
     return redirect(url_for("search", mode="destinos"))
 
 
-@app.route("/search/<mode>")
+@app.route("/search/<mode>", methods=["GET", "POST"])
 def search(mode):
     if mode not in ("destinos", "alojamientos", "medida"):
         abort(404)
 
-    args = request.args
-    environment = args.get("environment", "")
-    if mode not in ("destinos", "alojamientos", "medida"):
-        mode = "destinos"
+    form_class = get_search_form(mode)
+    form_data = request.args if request.method == "GET" else request.form
+    form = form_class(formdata=form_data, meta={"csrf": False})
 
-    environment = args.get("environment", "")
-    acc_type = args.get("type", "")
-    max_price = args.get("max_price", type=float)  # None si está vacío o no es número
-    no_visa = args.get("no_visa") == "on"
-    breakfast = args.get("breakfast") == "on"
-    pets = args.get("pets") == "on"
+    destinations_by_slug = {d["slug"]: d for d in filterDestinations()}
+
+    if not form.validate():
+        return render_template(
+            "search.html",
+            mode=mode,
+            f=form_data,
+            form=form,
+            found_destinations=[],
+            found_accommodations=[],
+            combos=[],
+            destinations_by_slug=destinations_by_slug,
+        )
+
+    def value(name):
+        field = getattr(form, name, None)
+        return field.data if field is not None else None
+
+    environment = value("environment") or ""
+    acc_type = value("type") or ""
+    max_price = value("max_price")
+    no_visa = bool(value("no_visa"))
+    breakfast = bool(value("breakfast"))
+    pets = bool(value("pets"))
 
     found_destinations, found_accommodations, combos = [], [], []
 
@@ -114,7 +133,7 @@ def search(mode):
             max_price, acc_type, breakfast, pets
         )
 
-    else:  # "medida": solo destinos con al menos un alojamiento que cumpla todo
+    else:  
         accommodations_ok = filterAccommodations(max_price, acc_type, breakfast)
         for d in filterDestinations(environment, no_visa):
             matches = [
@@ -126,11 +145,12 @@ def search(mode):
     return render_template(
         "search.html",
         mode=mode,
-        f=args,
+        f=form_data,
+        form=form,
         found_destinations=found_destinations,
         found_accommodations=found_accommodations,
         combos=combos,
-        destinations_by_slug={d["slug"]: d for d in filterDestinations()},
+        destinations_by_slug=destinations_by_slug,
     )
 
 

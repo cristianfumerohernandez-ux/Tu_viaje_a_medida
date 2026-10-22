@@ -80,7 +80,6 @@ accommodations = [
         "destination_name": "Islas Lofoten",
     },
     # Zanzíbar: sin alojamientos por ahora.
-
     # --- Playa del Carmen ---
     {
         "slug": "hostal-caribe-maya",
@@ -133,5 +132,31 @@ accommodations = [
         "extras": None,
         "image": "loft-quinta-avenida.jpg",
         "destination_name": "Playa del Carmen",
+    },
+    {
+        "slug": "santorini-boutique-suites",
+        "name": "Santorini Boutique Suites",
+        "destination_slug": "santorini",
+        "type": "Hotel",
+        "price_per_night": 180,
+        "includes_breakfast": True,
+        "allows_pets": False,
+        "stars": 4,
+        "extras": "Terraza privada con vistas a la caldera",
+        "image": "santoriniAccommodation.jpg",
+        "destination_name": "Santorini",
+    },
+    {
+        "slug": "cabaña-del-ventisquero",
+        "name": "Cabaña del Ventisquero",
+        "destination_slug": "patagonia",
+        "type": "Cabaña",
+        "price_per_night": 130,
+        "includes_breakfast": False,
+        "allows_pets": True,
+        "stars": 3,
+        "extras": "Chimenea y acceso a senderos de nieve",
+        "image": "patagoniaAccommodation.jpg",
+        "destination_name": "Patagonia",
     },
 ]

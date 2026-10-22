@@ -31,7 +31,7 @@
                         {% if d.image %}
                         <img src="{{ url_for('static', filename='img/destinations/' ~ d.image) }}" alt="{{ d.name }}">
                         {% endif %}
-                        {{ d.name }}</a> — {{ d.country }}
+                        {{ d.name }}</a>  {{ d.country }}
                     </li>
                 {% endfor %}
             </ul>
@@ -47,7 +47,7 @@
                         <img src="{{ url_for('static', filename='img/accomodations/' ~ a.image) }}" alt="{{ a.name }}">
                         {% endif %}
                         {{ a.name }}
-                    </a> — {{ a.type }}
+                    </a>  {{ a.type }}
                 </li>
                 {% endfor %}
             </ul>
@@ -59,7 +59,7 @@
             <ul>
                 {% for activity in activities %}
                 <li>
-                    <strong><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">{{ activity.name }}</a></strong> — {{ activity.destination }}
+                    <strong><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">{{ activity.name }}</a></strong>  {{ activity.destination }}
                 </li>
                 {% endfor %}
             </ul>

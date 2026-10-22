@@ -15,40 +15,37 @@
     <a href="{{ url_for('search', mode='medida') }}" class="{{ 'active' if mode == 'medida' }}">Viaje a medida</a>
 </nav>
 
-<form class="search-form" method="get" action="{{ url_for('search', mode=mode) }}">
-    <input type="hidden" name="modo" value="{{ mode }}">
+<form class="search-form" method="get" action="{{ url_for('search', mode=mode) }}" novalidate>
+
+    {% if form.errors %}
+    <div class="form-errors" role="alert">
+        <ul>
+            {% for field, errors in form.errors.items() %}
+            {% for err in errors %}<li>{{ form[field].label.text }}: {{ err }}</li>{% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
     {% if mode in ('destinos', 'medida') %}
     <div>
-        <label for="environment">Entorno</label>
-        <select id="environment" name="environment">
-            <option value="">Cualquiera</option>
-            {% for e in ['playa', 'montaña', 'ciudad'] %}
-            <option value="{{ e }}" {{ 'selected' if f.get('environment')==e }}>{{ e|capitalize }}</option>
-            {% endfor %}
-        </select>
-        <label class="chk"><input type="checkbox" name="no_visa" {{ 'checked' if f.get('no_visa') }}> Solo destinos sin
-            visado previo</label>
+        {{ form.environment.label }}
+        {{ form.environment() }}
+        <label class="chk">{{ form.no_visa() }} {{ form.no_visa.label.text }}</label>
     </div>
     {% endif %}
 
     {% if mode in ('alojamientos', 'medida') %}
     <div>
-        <label for="type">Tipo de alojamiento</label>
-        <select id="type" name="type">
-            <option value="">Cualquiera</option>
-            {% for t in ['hotel', 'hostal', 'cabaña', 'apartamento'] %}
-            <option value="{{ t }}" {{ 'selected' if f.get('type')==t }}>{{ t|capitalize }}</option>
-            {% endfor %}
-        </select>
-        <label for="max_price" style="margin-top:.6rem">Máximo por noche (€)</label>
-        <input type="number" id="max_price" name="max_price" min="0" step="5" value="{{ f.get('max_price', '') }}">
+        {{ form.type.label }}
+        {{ form.type() }}
+        <span style="display:block; margin-top:.6rem">{{ form.max_price.label }}</span>
+        {{ form.max_price(min=0, step=5) }}
     </div>
     <div>
-        <label class="chk"><input type="checkbox" name="breakfast" {{ 'checked' if f.get('breakfast') }}> Desayuno
-            incluido</label>
+        <label class="chk">{{ form.breakfast() }} {{ form.breakfast.label.text }}</label>
         {% if mode == 'alojamientos' %}
-        <label class="chk"><input type="checkbox" name="pets" {{ 'checked' if f.get('pets') }}> Admite mascotas</label>
+        <label class="chk">{{ form.pets() }} {{ form.pets.label.text }}</label>
         {% endif %}
     </div>
     {% endif %}
