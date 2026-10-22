@@ -27,11 +27,14 @@
     </div>
     {% endif %}
 
-    {% if mode in ('destinos', 'medida') %}
+        {% if mode in ('destinos', 'medida') %}
     <div>
         {{ form.environment.label }}
         {{ form.environment() }}
         <label class="chk">{{ form.no_visa() }} {{ form.no_visa.label.text }}</label>
+        {% if mode == 'medida' %}
+        <label class="chk">{{ form.breakfast() }} {{ form.breakfast.label.text }}</label>
+        {% endif %}
     </div>
     {% endif %}
 
@@ -42,11 +45,12 @@
         <span style="display:block; margin-top:.6rem">{{ form.max_price.label }}</span>
         {{ form.max_price(min=0, step=5) }}
     </div>
+    {% endif %}
+
+    {% if mode == 'alojamientos' %}
     <div>
         <label class="chk">{{ form.breakfast() }} {{ form.breakfast.label.text }}</label>
-        {% if mode == 'alojamientos' %}
         <label class="chk">{{ form.pets() }} {{ form.pets.label.text }}</label>
-        {% endif %}
     </div>
     {% endif %}
 
@@ -102,13 +106,13 @@
     todos tus requisitos</p>
 {% for c in combos %}
 <article class="combo">
-    <header>
-        <h3><a href="{{ url_for('destinationDetail', slug=c.destination.slug) }}">{{ c.destination.name }}</a></h3>
+    <div class="combo-head">
+        <div class="combo-title"><a href="{{ url_for('destinationDetail', slug=c.destination.slug) }}">{{ c.destination.name }}</a></div>
         <p>{{ c.destination.country }} · {{ c.destination.environment|capitalize }}
             <span class="tag {{ 'danger' if c.destination.is_visa_required else 'ok' }}">{{ 'Requiere visado' if
                 c.destination.is_visa_required else 'Sin visado previo' }}</span>
         </p>
-    </header>
+    </div>
     <ul>
         {% for a in c.accommodations %}
         <li>
