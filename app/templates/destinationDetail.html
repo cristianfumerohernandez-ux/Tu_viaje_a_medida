@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block content %}
-<h1>{{ item.name }}</h1>
+<h1>{{ item.name }} ({{ item.country }})</h1>
 <p>{{ item.type }}</p>
 
 <ul class="detail-list">
@@ -17,6 +17,30 @@
 {% if item.image %}
 <img src="{{ url_for('static', filename='img/destinations/' ~ item.image) }}" alt="{{ item.name }}">
 {% endif %}
+<ul>
+  {%if accommodationsFil|length != 0%}
+  <h1>{{accommodationsFil|length}}</h1>
+  <h3>Alojamientos</h3>
+  {% for accommodation in accomodationsFil %}
+  <li><a href="{{ url_for('accommodationsDetails', slug=accommodation.slug) }}">
+      {% if accommodation.image %}
+      <img src="{{ url_for('static', filename='img/accomodations/' ~ accommodation.image ) }}"
+        alt="{{ accommodation.name }}">
+      {% endif %}
+      {{ accommodation.name }}</a> — {{ accommodation.country }}
+  </li>
+  {% endfor %}
+  {% endif %}
 
+  {%if activitiesFil|length != 0%}
+  <h3>Actividades</h3>
+  {% for activity in activities %}
+  <li><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">
+      {{ activity.name }}</a> {{ activity.destination }}
+  </li>
+  {% endfor %}
+  {% endif %}
+
+</ul>
 <a href="{{ url_for('index') }}">← Volver al catálogo</a>
 {% endblock %}

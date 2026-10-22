@@ -9,6 +9,7 @@ def showActivities():
         {
             "slug": activity["slug"],
             "name": activity["name"],
+            "destination_slug": activity["destination_slug"],
             "destination": destinationNames.get(
                 activity["destination_slug"], "Destino desconocido"
             ),
@@ -34,7 +35,8 @@ def getAccomodationsList():
             "slug": a["slug"],
             "name": a["name"],
             "type": a["type"],
-            "image": a["image"]
+            "image": a["image"],
+            "destination_slug": a["destination_slug"]
         })
     return result
     
@@ -64,3 +66,17 @@ def filterAccommodations(max_price=None, acc_type="", breakfast=False, pets=Fals
         and (not pets or a["allows_pets"])
     ]
     return sorted(result, key=lambda a: a["price_per_night"])
+
+def filterBySlug(name):
+    accommodationArray = []
+    activitiesArray = []
+
+    for accommodation in accommodations:
+        if accommodation["destination_slug"] == name:
+            accommodationArray.append(accommodation)
+
+    for activity in activities:
+        if activity["destination_slug"] == name:
+            activitiesArray.append(activity)
+
+    return accommodationArray, activitiesArray

@@ -8,6 +8,7 @@ from src.main_lists import (
     getActivities,
     filterDestinations,
     filterAccommodations,
+    filterBySlug
 )
 
 # Inicializamos la aplicación
@@ -44,8 +45,8 @@ def destinationDetail(slug):
     item = getDestination(slug)
     if item is None:
         abort(404)
-
-    return render_template("destinationDetail.html", item=item)
+    accommodationsFil,activitiesFil = filterBySlug(slug)
+    return render_template("destinationDetail.html", item=item,accommodationsFil = accommodationsFil, activitiesFil=activitiesFil)
 
 
 @app.route("/alojamientos/<slug>")
