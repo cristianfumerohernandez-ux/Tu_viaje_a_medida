@@ -1,11 +1,9 @@
-/* Main Colors */
 :root {
     --primary-color: #01080a;
     --secondary-color: #ffffff;
     --accent-color: rgb(235, 174, 8);
 }
 
-/* Base */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -15,7 +13,6 @@ body {
     line-height: 1.6;
 }
 
-/* Header y navegación */
 header {
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -54,17 +51,16 @@ nav ul li a:hover {
     color: var(--accent-color);
 }
 
-/* Contenido principal */
 main {
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
-    padding-bottom: 100px; /* espacio para el footer fijo */
+    padding-bottom: 100px;
+    /* espacio para el footer fijo */
     box-sizing: border-box;
     text-align: left;
 }
 
-/* Secciones (destinos, actividades, alojamientos) */
 main section {
     margin-bottom: 2.5rem;
 }
@@ -80,7 +76,6 @@ main p {
     margin-bottom: 1rem;
 }
 
-/* Listas con aspecto de tarjetas */
 main section ul {
     list-style: none;
     margin: 0;
@@ -98,18 +93,13 @@ main section li {
     padding: 1rem 1.2rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
 }
-
-/* main section li:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-} */
 
 main li strong {
     color: var(--primary-color);
 }
 
-/* Enlaces del contenido */
 main a {
     color: var(--primary-color);
     font-weight: bold;
@@ -119,21 +109,26 @@ main a {
 }
 
 main a:hover {
-    /* box-shadow: 5px 5px 20px var(--primary-color); */
-    /* background-color: var(--accent-color); */
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
     transform: translateY(-3px);
 }
 
-/* Imagenes y enlaces de la lista principal */
-a{
+main section li>a,
+main section li strong>a {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35), 0 0 8px rgba(235, 174, 8, 0.2);
+}
+
+a {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-a img{
+
+a img {
+    height: 235px;
     width: 100%;
 }
+
 /* Footer */
 footer {
     background-color: var(--primary-color);
@@ -156,13 +151,13 @@ footer p {
     margin: 0;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
     nav ul {
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
     }
+
     nav h1 {
         font-size: 1.5rem;
     }
