@@ -19,9 +19,8 @@
 {% endif %}
 <ul>
   {%if accommodationsFil|length != 0%}
-  <h1>{{accommodationsFil|length}}</h1>
   <h3>Alojamientos</h3>
-  {% for accommodation in accomodationsFil %}
+  {% for accommodation in accommodationsFil %}
   <li><a href="{{ url_for('accommodationsDetails', slug=accommodation.slug) }}">
       {% if accommodation.image %}
       <img src="{{ url_for('static', filename='img/accomodations/' ~ accommodation.image ) }}"
@@ -34,9 +33,9 @@
 
   {%if activitiesFil|length != 0%}
   <h3>Actividades</h3>
-  {% for activity in activities %}
+  {% for activity in activitiesFil %}
   <li><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">
-      {{ activity.name }}</a> {{ activity.destination }}
+      {{ activity.name }}</a> {{ item.name }}
   </li>
   {% endfor %}
   {% endif %}
