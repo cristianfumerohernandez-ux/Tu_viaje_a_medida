@@ -1,45 +1,51 @@
 {% extends "index.html" %}
+{%block style%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/details.css') }}">
+{% endblock %}
 
 {% block content %}
-<h1>{{ item.name }} ({{ item.country }})</h1>
-<p>{{ item.type }}</p>
+<div class="detail-container">
+  <h1>{{ item.name }} ({{ item.country }})</h1>
+  <p>{{ item.type }}</p>
 
-<ul class="detail-list">
-  <li><strong>Entorno:</strong> {{ item.environment }}</li>
-  <li><strong>Temporada alta:</strong> {{ item.high_season }}</li>
-  <li><strong>Visado:</strong> {{ "Sí" if item.is_visa_required else "No" }}</li>
-</ul>
+  <div class="detail-content">
+    <ul class="detail-list">
+      <li><strong>Entorno:</strong> {{ item.environment }}</li>
+      <li><strong>Temporada alta:</strong> {{ item.high_season }}</li>
+      <li><strong>Visado:</strong> {{ "Sí" if item.is_visa_required else "No" }}</li>
+    </ul>
 
-{% if item.tip %}
-<p><strong>Consejo:</strong> {{ item.tip }}</p>
-{% endif %}
+    {% if item.tip %}
+    <p><strong>Consejo:</strong> {{ item.tip }}</p>
+    {% endif %}
 
-{% if item.image %}
-<img src="{{ url_for('static', filename='img/destinations/' ~ item.image) }}" alt="{{ item.name }}">
-{% endif %}
-<ul>
-  {%if accommodationsFil|length != 0%}
-  <h3>Alojamientos</h3>
-  {% for accommodation in accommodationsFil %}
-  <li><a href="{{ url_for('accommodationsDetails', slug=accommodation.slug) }}">
-      {% if accommodation.image %}
-      <img src="{{ url_for('static', filename='img/accomodations/' ~ accommodation.image ) }}"
-        alt="{{ accommodation.name }}">
+    {% if item.image %}
+    <img src="{{ url_for('static', filename='img/destinations/' ~ item.image) }}" alt="{{ item.name }}">
+    {% endif %}
+    <ul class="detail-related">
+      {%if accommodationsFil|length != 0%}
+      <h2>Alojamientos en {{ item.name }}</h2>
+      {% for accommodation in accommodationsFil %}
+      <li><a href="{{ url_for('accommodationsDetails', slug=accommodation.slug) }}">
+          {% if accommodation.image %}
+          <img src="{{ url_for('static', filename='img/accomodations/' ~ accommodation.image ) }}"
+            alt="{{ accommodation.name }}">
+          {% endif %}
+          {{ accommodation.name }}</a> {{ accommodation.type }} - {{accommodation.price}} €
+      </li>
+      {% endfor %}
       {% endif %}
-      {{ accommodation.name }}</a> — {{ accommodation.country }}
-  </li>
-  {% endfor %}
-  {% endif %}
 
-  {%if activitiesFil|length != 0%}
-  <h3>Actividades</h3>
-  {% for activity in activitiesFil %}
-  <li><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">
-      {{ activity.name }}</a> {{ item.name }}
-  </li>
-  {% endfor %}
-  {% endif %}
-
-</ul>
-<a href="{{ url_for('index') }}">← Volver al catálogo</a>
+      {%if activitiesFil|length != 0%}
+      <h2>Actividades en {{ item.name }}</h2>
+      {% for activity in activitiesFil %}
+      <li><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">
+          {{ activity.name }}</a> {{ item.name }}
+      </li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+    <a href="{{ url_for('index') }}" id="return-home">← Volver al catálogo</a>
+  </div>
+</div>
 {% endblock %}

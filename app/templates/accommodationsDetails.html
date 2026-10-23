@@ -1,31 +1,39 @@
 
 {% extends "index.html" %}
 
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/details.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>{{ item.name }}</h1>
+<div class="detail-container">
+  <h1>{{ item.name }}</h1>
 
-<ul class="detail-list">
-  <li><strong>Nombre establecimiento:</strong> {{ item.name }}</li>
-  <li><strong>Nivel de estrellas:</strong> {{ item.stars }}</li>
-  <li><strong>Precio por noche:</strong> {{ item.price_per_night }}€ </li>
-  <li><strong>¿Tiene incluido desayuno?</strong> {{ "Sí" if item.includes_breakfast else "No" }}</li>
-  <li><strong>¿Acepta mascotas?</strong> {{ "Sí" if item.allows_pets else "No" }}</li>
-</ul>
+  <div class="detail-content">
+    <ul class="detail-list">
+      <li><strong>Nombre establecimiento:</strong> {{ item.name }}</li>
+      <li><strong>Nivel de estrellas:</strong> {{ item.stars }}</li>
+      <li><strong>Precio por noche:</strong> {{ item.price_per_night }}€ </li>
+      <li><strong>¿Tiene incluido desayuno?</strong> {{ "Sí" if item.includes_breakfast else "No" }}</li>
+      <li><strong>¿Acepta mascotas?</strong> {{ "Sí" if item.allows_pets else "No" }}</li>
+    </ul>
 
-{% if item.tip %}
-<p><strong>Consejo:</strong> {{ item.tip }}</p>
-{% endif %}
+    {% if item.tip %}
+    <p><strong>Consejo:</strong> {{ item.tip }}</p>
+    {% endif %}
 
-{% if item.extras %}
-<p><strong>Extras:</strong> {{ item.extras }}</p>
-{% endif %}
+    {% if item.extras %}
+    <p><strong>Extras:</strong> {{ item.extras }}</p>
+    {% endif %}
 
-<p><a href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a></p>
+    <p><a href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a></p>
 
-<p><a href="{{ url_for('index') }}">← Volver al catálogo</a></p>
+    <a href="{{ url_for('index') }}" id="return-home">← Volver al catálogo</a>
 
-{% if item.image %}
-<img src="{{ url_for('static', filename='img/accomodations/' ~ item.image) }}" alt="{{ item.name }}">
-{% endif %}
+    {% if item.image %}
+    <img src="{{ url_for('static', filename='img/accomodations/' ~ item.image) }}" alt="{{ item.name }}">
+    {% endif %}
+  </div>
+</div>
 
 {% endblock %}
