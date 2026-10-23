@@ -1,31 +1,50 @@
 
 {% extends "index.html" %}
 
+{% block title %}{{ item.name }} | Alojamiento{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>{{ item.name }}</h1>
+<article class="detail-page">
+  <header class="detail-heading">
+    <p class="detail-eyebrow">Alojamiento · {{ destination.name }}</p>
+    <h1>{{ item.name }}</h1>
+    {% if item.stars %}
+    <p class="detail-rating" role="img" aria-label="{{ item.stars }} estrellas">{{ '★' * item.stars }}</p>
+    {% endif %}
+  </header>
 
-<ul class="detail-list">
-  <li><strong>Nombre establecimiento:</strong> {{ item.name }}</li>
-  <li><strong>Nivel de estrellas:</strong> {{ item.stars }}</li>
-  <li><strong>Precio por noche:</strong> {{ item.price_per_night }}€ </li>
-  <li><strong>¿Tiene incluido desayuno?</strong> {{ "Sí" if item.includes_breakfast else "No" }}</li>
-  <li><strong>¿Acepta mascotas?</strong> {{ "Sí" if item.allows_pets else "No" }}</li>
-</ul>
+  <div class="detail-content">
+    <ul class="detail-list">
+      <li><strong>Tipo</strong><span>{{ item.type }}</span></li>
+      {% if item.stars %}
+      <li><strong>Categoría</strong><span>{{ item.stars }} estrellas</span></li>
+      {% endif %}
+      <li><strong>Precio por noche</strong><span>{{ item.price_per_night }} €</span></li>
+      <li><strong>Desayuno incluido</strong><span>{{ "Sí" if item.includes_breakfast else "No" }}</span></li>
+      <li><strong>Acepta mascotas</strong><span>{{ "Sí" if item.allows_pets else "No" }}</span></li>
+      {% if item.extras %}
+      <li><strong>Extras</strong><span>{{ item.extras }}</span></li>
+      {% endif %}
+    </ul>
 
-{% if item.tip %}
-<p><strong>Consejo:</strong> {{ item.tip }}</p>
-{% endif %}
+    {% if item.image %}
+    <img class="detail-image" src="{{ url_for('static', filename='img/accomodations/' ~ item.image) }}"
+      alt="{{ item.name }}">
+    {% endif %}
+  </div>
 
-{% if item.extras %}
-<p><strong>Extras:</strong> {{ item.extras }}</p>
-{% endif %}
+  {% if item.tip %}
+  <p class="detail-tip"><strong>Consejo:</strong> {{ item.tip }}</p>
+  {% endif %}
 
-<p><a href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a></p>
-
-<p><a href="{{ url_for('index') }}">← Volver al catálogo</a></p>
-
-{% if item.image %}
-<img src="{{ url_for('static', filename='img/accomodations/' ~ item.image) }}" alt="{{ item.name }}">
-{% endif %}
+  <nav class="detail-actions" aria-label="Navegación relacionada">
+    <a href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a>
+    <a href="{{ url_for('index') }}">Volver al catálogo</a>
+  </nav>
+</article>
 
 {% endblock %}

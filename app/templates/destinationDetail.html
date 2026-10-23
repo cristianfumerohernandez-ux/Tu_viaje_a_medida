@@ -1,45 +1,72 @@
 {% extends "index.html" %}
 
+{% block title %}{{ item.name }} | Destino{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>{{ item.name }} ({{ item.country }})</h1>
-<p>{{ item.type }}</p>
+<article class="detail-page">
+  <header class="detail-heading">
+    <p class="detail-eyebrow">Guía de viaje</p>
+    <h1>{{ item.name }} <span>({{ item.country }})</span></h1>
+    <p class="detail-subtitle">{{ item.environment|capitalize }}</p>
+  </header>
 
-<ul class="detail-list">
-  <li><strong>Entorno:</strong> {{ item.environment }}</li>
-  <li><strong>Temporada alta:</strong> {{ item.high_season }}</li>
-  <li><strong>Visado:</strong> {{ "Sí" if item.is_visa_required else "No" }}</li>
-</ul>
+  <div class="detail-content">
+    <ul class="detail-list">
+      <li><strong>Entorno</strong><span>{{ item.environment|capitalize }}</span></li>
+      <li><strong>Temporada alta</strong><span>{{ item.high_season|capitalize }}</span></li>
+      <li><strong>Visado</strong><span>{{ "Sí" if item.is_visa_required else "No" }}</span></li>
+    </ul>
 
-{% if item.tip %}
-<p><strong>Consejo:</strong> {{ item.tip }}</p>
-{% endif %}
+    {% if item.image %}
+    <img class="detail-image" src="{{ url_for('static', filename='img/destinations/' ~ item.image) }}"
+      alt="{{ item.name }}">
+    {% endif %}
+  </div>
 
-{% if item.image %}
-<img src="{{ url_for('static', filename='img/destinations/' ~ item.image) }}" alt="{{ item.name }}">
-{% endif %}
-<ul>
-  {%if accommodationsFil|length != 0%}
-  <h3>Alojamientos</h3>
-  {% for accommodation in accommodationsFil %}
-  <li><a href="{{ url_for('accommodationsDetails', slug=accommodation.slug) }}">
-      {% if accommodation.image %}
-      <img src="{{ url_for('static', filename='img/accomodations/' ~ accommodation.image ) }}"
-        alt="{{ accommodation.name }}">
-      {% endif %}
-      {{ accommodation.name }}</a> — {{ accommodation.country }}
-  </li>
-  {% endfor %}
+  {% if item.tip %}
+  <p class="detail-tip"><strong>Consejo:</strong> {{ item.tip }}</p>
   {% endif %}
 
-  {%if activitiesFil|length != 0%}
-  <h3>Actividades</h3>
-  {% for activity in activitiesFil %}
-  <li><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">
-      {{ activity.name }}</a> {{ item.name }}
-  </li>
-  {% endfor %}
+  {% if accommodationsFil %}
+  <section class="related-section">
+    <h2>Alojamientos en {{ item.name }}</h2>
+    <ul class="related-grid">
+      {% for accommodation in accommodationsFil %}
+      <li class="related-card">
+        <a href="{{ url_for('accommodationsDetails', slug=accommodation.slug) }}">
+          {% if accommodation.image %}
+          <img src="{{ url_for('static', filename='img/accomodations/' ~ accommodation.image) }}"
+            alt="{{ accommodation.name }}">
+          {% endif %}
+          <span>{{ accommodation.name }}</span>
+        </a>
+        <p>{{ accommodation.type }} · {{ accommodation.price_per_night }} € / noche</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
   {% endif %}
 
-</ul>
-<a href="{{ url_for('index') }}">← Volver al catálogo</a>
+  {% if activitiesFil %}
+  <section class="related-section">
+    <h2>Actividades en {{ item.name }}</h2>
+    <ul class="related-grid">
+      {% for activity in activitiesFil %}
+      <li class="related-card">
+        <a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">{{ activity.name }}</a>
+        <p>{{ activity.duration_hours }} horas · {{ activity.price_per_person }} € por persona</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <nav class="detail-actions" aria-label="Navegación relacionada">
+    <a href="{{ url_for('index') }}">← Volver al catálogo</a>
+  </nav>
+</article>
 {% endblock %}
