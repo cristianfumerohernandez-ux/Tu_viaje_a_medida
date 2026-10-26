@@ -96,7 +96,7 @@ img {
     transition: background-color 0.3s ease;
 }
 
-#backButton {
+.backButton {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;

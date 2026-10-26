@@ -28,7 +28,7 @@
     {% if item.image %}
     <img src="{{ url_for('static', filename='img/accomodations/' ~ item.image) }}" alt="{{ item.name }}">
     {% endif %}
-    <a id="backButton" href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a>
+    <a class="backButton" href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a>
 
     <a href="{{ url_for('index') }}" id="return-home">← Volver al catálogo</a>
 
