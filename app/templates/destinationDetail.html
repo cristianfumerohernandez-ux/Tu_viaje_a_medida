@@ -10,8 +10,8 @@
 
   <div class="detail-content">
     <ul class="detail-list">
-      <li><strong>Entorno:</strong> {{ item.environment }}</li>
-      <li><strong>Temporada alta:</strong> {{ item.high_season }}</li>
+      <li><strong>Entorno:</strong> {{ item.environment | title }}</li>
+      <li><strong>Temporada alta:</strong> {{ item.high_season | title }}</li>
       <li><strong>Visado:</strong> {{ "Sí" if item.is_visa_required else "No" }}</li>
     </ul>
 
@@ -31,7 +31,11 @@
           <img src="{{ url_for('static', filename='img/accomodations/' ~ accommodation.image ) }}"
             alt="{{ accommodation.name }}">
           {% endif %}
-          {{ accommodation.name }}</a> {{ accommodation.type }} - {{accommodation.price}} €
+          {{ accommodation.name }}</a> {{ accommodation.type }} 
+          <br>
+        {% if accommodation.stars 
+          %}<span class="stars" role="img" aria-label="{{ accommodation.stars }} estrellas">{{ '★' * accommodation .stars}}</span>
+        {% endif %}
       </li>
       {% endfor %}
       {% endif %}
@@ -41,6 +45,9 @@
       {% for activity in activitiesFil %}
       <li><a href="{{ url_for('activitiesDetails', slug=activity.slug) }}">
           {{ activity.name }}</a> {{ item.name }}
+        {% if activity.stars 
+          %}<span class="stars" role="img" aria-label="{{ activity.stars }} estrellas">{{ '★' * activity.stars}}</span>
+        {% endif %}
       </li>
       {% endfor %}
       {% endif %}

@@ -9,6 +9,11 @@
     margin: 20px auto;
 }
 
+.detail-container h1 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid var(--accent-color);
+}
 .detail-list {
     display: flex;
     gap: 20px;
@@ -59,7 +64,6 @@ img {
 .detail-related h2 {
     flex: 0 0 100%;
     text-align: left;
-    border-bottom: 2px solid var(--accent-color);
 }
 
 .detail-related li {
@@ -85,9 +89,28 @@ img {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
+    background-color: black;
+    color: var(--accent-color);
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+#backButton {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
     background-color: var(--accent-color);
     color: #fff;
     text-decoration: none;
     border-radius: 30px;
     transition: background-color 0.3s ease;
+}
+
+.stars {
+    color: #b8860b;
+    margin-left: .4rem;
+    font-size: .9em;
+    letter-spacing: .05em;
+    white-space: nowrap
 }

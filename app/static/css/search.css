@@ -15,9 +15,9 @@
 }
 
 .search-tabs a.active {
-    background: #1f7a8c;
-    color: #fff;
-    border-color: #1f7a8c
+    background: black;
+    color: var(--accent-color);
+    border-color: black
 }
 
 .search-form {
@@ -57,8 +57,8 @@
     padding: .6rem 1.2rem;
     border: 0;
     border-radius: 8px;
-    background: #1f7a8c;
-    color: #fff;
+    background: black;
+    color: var(--accent-color);
     font: inherit;
     font-weight: 600;
     cursor: pointer;
@@ -141,7 +141,7 @@
 .price {
     font-weight: 700;
     font-size: 1.15rem;
-    color: #1f7a8c;
+    color: var(--accent-color);
     margin: .3rem 0 0
 }
 
@@ -161,8 +161,8 @@
 }
 
 .combo-head {
-    background: #1f7a8c;
-    color: #fff;
+    background: black;
+    color: var(--accent-color);
     padding: .6rem .9rem
 }
 

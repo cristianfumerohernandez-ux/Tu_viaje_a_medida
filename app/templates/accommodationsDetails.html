@@ -7,8 +7,7 @@
 
 {% block content %}
 <div class="detail-container">
-  <h1>{{ item.name }}</h1>
-
+  <h1 id >{{ item.name }}</h1>
   <div class="detail-content">
     <ul class="detail-list">
       <li><strong>Nombre establecimiento:</strong> {{ item.name }}</li>
@@ -25,14 +24,14 @@
     {% if item.extras %}
     <p><strong>Extras:</strong> {{ item.extras }}</p>
     {% endif %}
-
-    <p><a href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a></p>
-
-    <a href="{{ url_for('index') }}" id="return-home">← Volver al catálogo</a>
-
+    
     {% if item.image %}
     <img src="{{ url_for('static', filename='img/accomodations/' ~ item.image) }}" alt="{{ item.name }}">
     {% endif %}
+    <a id="backButton" href="{{ url_for('destinationDetail', slug=destination.slug) }}">← Ver guía completa de {{ destination.name }}</a>
+
+    <a href="{{ url_for('index') }}" id="return-home">← Volver al catálogo</a>
+
   </div>
 </div>
 
